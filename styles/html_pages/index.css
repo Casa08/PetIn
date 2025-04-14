@@ -1,0 +1,163 @@
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background-color: #fff;
+  color: #111;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+header h1 {
+  font-size: 0.5rem;
+}
+nav a {
+  margin-left: 2rem;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+}
+.welcome_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500px; /* Full viewport height */
+  text-align: center;
+  background-color: #fff;
+}
+.welcome_header h2 {
+  font-size: 1.5rem;
+}
+.welcome_header p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #666;
+}
+.welcome_header img {
+  width: auto;
+  height: 200px;
+  margin: 1rem auto;
+}
+.section {
+  padding: 0 2rem;
+  margin-bottom: 40px;
+}
+.pet_section_link {
+  text-decoration: none;           
+  cursor: pointer;                 
+  font-weight: 600;                
+  color: #2c2c45;                  
+  padding: 0.5rem 1rem;            
+  border-radius: 8px;              
+  transition: all 0.3s ease;       
+  display: inline-block;           
+  background-color: transparent;  
+}
+.section h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1 rem;
+  justify-content: space-between;
+}
+.product-container {
+  width: 23%;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.product-content {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: #555;
+}
+.product-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 180px;
+  margin-bottom: 20px;
+}
+
+.product-image {
+  /* Images will overflow their container by default. To
+    prevent this, we set max-width and max-height to 100%
+    so they stay inside their container. */
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.product-name {
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+.product-rating-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.product-rating-stars {
+  width: 100px;
+  margin-right: 6px;
+}
+
+.product-rating-count {
+  color: rgb(1, 124, 182);
+  cursor: pointer;
+  margin-top: 3px;
+}
+
+.product-price {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.product-quantity-container {
+  margin-bottom: 17px;
+}
+
+.product-spacer {
+  flex: 1;
+}
+
+.added-to-cart {
+  color: rgb(6, 125, 98);
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+
+  /* At first, the "Added to cart" message will
+     be invisible. Use JavaScript to change the
+     opacity and make it visible. */
+  opacity: 0;
+}
+
+.added-to-cart img {
+  height: 20px;
+  margin-right: 5px;
+}
+
+.add-to-cart-button {
+  width: 100%;
+  padding: 8px;
+  border-radius: 50px;
+}
+
+.product-name {
+  height: 40px;
+  margin-bottom: 5px;
+}
