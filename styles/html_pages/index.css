@@ -150,6 +150,10 @@ nav a {
   height: 20px;
   margin-right: 5px;
 }
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
 
 .add-to-cart-button {
   width: 100%;
@@ -160,4 +164,8 @@ nav a {
 .product-name {
   height: 40px;
   margin-bottom: 5px;
+}
+
+.added-to-cart-visible {
+  opacity: 1;
 }

@@ -123,11 +123,18 @@
      be invisible. Use JavaScript to change the
      opacity and make it visible. */
   opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  height: 24px; /* Add fixed height so it doesn't collapse */
 }
 
 .added-to-cart img {
   height: 20px;
   margin-right: 5px;
+}
+
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
 }
 
 .add-to-cart-button {
@@ -136,4 +143,6 @@
   border-radius: 50px;
 }
 
-
+.added-to-cart-visible {
+  opacity: 1;
+}
