@@ -154,7 +154,7 @@ export const products = [
     image: "../images/products/dc_2.webp",
     name: "TDTOK Dog Life Jacket Shark Fin American Flag Pattern with Rescue Handle and Reflective Stripes, High Buoyancy Life Safety Vest for Small,Medium,Large Dogs for Swimming and Boating (Small)",
     rating: {
-      stars: 0.5,
+      stars: 5.0,
       count: 50
     },
     priceCents: 3200,
