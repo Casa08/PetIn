@@ -2,6 +2,7 @@ import {cart} from '../scripts/products/cart.js';
 import { products as dogProducts } from './products/dog_product.js';
 import { products as catProducts } from './products/cat_product.js';
 import { products as birdProducts } from './products/bird_product.js';
+import { centsToDollars } from './utilities/money_handling.js';
 
 const allProducts = [...dogProducts, ...catProducts, ...birdProducts];
 
@@ -39,7 +40,7 @@ cart.forEach((cartItem) => {
               ${matchingProduct.name}
             </div>
             <div class="product-price">
-              $${matchingProduct.priceCents / 100}
+              $${centsToDollars(matchingProduct.priceCents)}
             </div>
             <div class="product-quantity">
               <span>
@@ -61,7 +62,7 @@ cart.forEach((cartItem) => {
             <div class="delivery-option">
               <input type="radio" checked
                 class="delivery-option-input"
-                name="delivery-option-1">
+                name="delivery-option-${matchingProduct.id}">
               <div>
                 <div class="delivery-option-date">
                   Tuesday, June 21
@@ -74,7 +75,7 @@ cart.forEach((cartItem) => {
             <div class="delivery-option">
               <input type="radio"
                 class="delivery-option-input"
-                name="delivery-option-1">
+                name="delivery-option-${matchingProduct.id}">
               <div>
                 <div class="delivery-option-date">
                   Wednesday, June 15
@@ -87,7 +88,7 @@ cart.forEach((cartItem) => {
             <div class="delivery-option">
               <input type="radio"
                 class="delivery-option-input"
-                name="delivery-option-1">
+                name="delivery-option-${matchingProduct.id}">
               <div>
                 <div class="delivery-option-date">
                   Monday, June 13
