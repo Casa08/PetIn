@@ -75,6 +75,8 @@ document.querySelector('.js-products-grid').
       innerHTML = cartQuantity;
   }
 
+  updateCartQuantity();
+
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     let addedMessageTimeoutId; //For using closure

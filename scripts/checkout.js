@@ -3,6 +3,10 @@ import { products as dogProducts } from './products/dog_product.js';
 import { products as catProducts } from './products/cat_product.js';
 import { products as birdProducts } from './products/bird_product.js';
 import { centsToDollars } from './utilities/money_handling.js';
+import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+import {deliveryOptions} from './products/delivery_options.js';
+
+
 
 const allProducts = [...dogProducts, ...catProducts, ...birdProducts];
 console.log(cart);
@@ -61,50 +65,50 @@ cart.forEach((cartItem) => {
             <div class="delivery-options-title">
               Choose a delivery option:
             </div>
-            <div class="delivery-option">
-              <input type="radio" checked
-                class="delivery-option-input"
-                name="delivery-option-${matchingProduct.id}">
-              <div>
-                <div class="delivery-option-date">
-                  Tuesday, June 21
-                </div>
-                <div class="delivery-option-price">
-                  FREE Shipping
-                </div>
-              </div>
-            </div>
-            <div class="delivery-option">
-              <input type="radio"
-                class="delivery-option-input"
-                name="delivery-option-${matchingProduct.id}">
-              <div>
-                <div class="delivery-option-date">
-                  Wednesday, June 15
-                </div>
-                <div class="delivery-option-price">
-                  $4.99 - Shipping
-                </div>
-              </div>
-            </div>
-            <div class="delivery-option">
-              <input type="radio"
-                class="delivery-option-input"
-                name="delivery-option-${matchingProduct.id}">
-              <div>
-                <div class="delivery-option-date">
-                  Monday, June 13
-                </div>
-                <div class="delivery-option-price">
-                  $9.99 - Shipping
-                </div>
-              </div>
-            </div>
+            
+            ${deliveryOptionsHTML(matchingProduct)}
           </div>
         </div>
       </div>
   `;
 });
+
+  function deliveryOptionsHTML(matchingProduct) {
+    let HTML = '';
+    deliveryOptions.forEach((deliveryOption) => {
+      const today = dayjs();
+      const deliveryDate = today.add(
+        deliveryOption.deliveryDays, 'days'
+      );
+      
+      const dateDisplay = deliveryDate.format(
+        'dddd, MMMM D' 
+      );
+
+      const priceDisplay = deliveryOption.priceCents
+       === 0
+       ? 'FREE'
+       : `$${centsToDollars(deliveryOption.priceCents)} -`;
+      
+      HTML += `
+        <div class="delivery-option">
+          <input type="radio"
+            class="delivery-option-input"
+            name="delivery-option-${matchingProduct.id}">
+          <div>
+            <div class="delivery-option-date">
+              ${dateDisplay}
+            </div>
+            <div class="delivery-option-price">
+              ${priceDisplay} Shipping
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    
+    return HTML;
+  }
 
 document.querySelector('.js-order-summary').
   innerHTML = cartSummaryHTML
@@ -121,5 +125,20 @@ document.querySelectorAll('.js-delete-link').
       );
       
       container.remove();
+
+      updateCartQuantity();
     });
   })
+
+  function updateCartQuantity() {
+    let cartQuantity = 0;
+
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
+
+    document.querySelector('.js-return-to-home-link').
+      innerHTML = `${cartQuantity} items`;
+  }
+  
+  updateCartQuantity();

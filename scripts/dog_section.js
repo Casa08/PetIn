@@ -77,11 +77,11 @@ document.querySelector('.js-products-grid').
       innerHTML = cartQuantity;
   }
 
- 
+  updateCartQuantity();
 
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
-    let addedMessageTimeoutId; //For using closure
+    
 
     button.addEventListener('click', () => {
       const {productId} = button.dataset;
@@ -92,3 +92,5 @@ document.querySelectorAll('.js-add-to-cart')
       
     });
   });
+
+  

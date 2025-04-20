@@ -73,6 +73,8 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
   }
 
+  updateCartQuantity();
+
   document.querySelectorAll('.js-add-to-cart')
     .forEach((button) => {
       //let addedMessageTimeoutId; // For using closure
