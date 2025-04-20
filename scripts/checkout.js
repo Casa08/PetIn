@@ -1,11 +1,11 @@
-import {cart, removeFromCart} from '../scripts/products/cart.js';
+import {cart, removeFromCart} from './products/cart.js';
 import { products as dogProducts } from './products/dog_product.js';
 import { products as catProducts } from './products/cat_product.js';
 import { products as birdProducts } from './products/bird_product.js';
 import { centsToDollars } from './utilities/money_handling.js';
 
 const allProducts = [...dogProducts, ...catProducts, ...birdProducts];
-
+console.log(cart);
 let cartSummaryHTML = '';
 
 cart.forEach((cartItem) => {
@@ -113,7 +113,7 @@ document.querySelector('.js-order-summary').
 document.querySelectorAll('.js-delete-link').
   forEach((link) => {
     link.addEventListener('click', () => {
-      const productId = link.dataset.productId;
+      const { productId } = link.dataset;
       removeFromCart(productId);
     
      const container = document.querySelector(

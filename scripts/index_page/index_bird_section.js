@@ -1,6 +1,7 @@
-import {cart} from '../products/cart.js';
-import {products as birdProducts} from './products/bird_product_index.js';
+import { cart, addToCart } from '../products/cart.js';
+import { products as birdProducts } from './products/bird_product_index.js';
 import { centsToDollars } from '../utilities/money_handling.js';
+import { showAddedMessage } from '../utilities/show_added_message.js';
 
 let productsHTML = '';
 
@@ -51,75 +52,37 @@ birdProducts.forEach((product) => {
       </div>
   
       <button class="add-to-cart-button button-primary js-add-to-cart"
-              data-product-id="${product.id}"
-      >
+              data-product-id="${product.id}">
         Add to Cart
       </button>
     </div> 
   `;
-
 });
 
-document.querySelector('.js-bird-products-grid').
-  innerHTML = productsHTML;
+// 🧠 Ensure DOM is ready before we manipulate it or bind events
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('.js-bird-products-grid').innerHTML = productsHTML;
 
-document.querySelectorAll('.js-add-to-cart')
-  .forEach((button) => {
-    let addedMessageTimeoutId; //For using closure
+  function updateCartQuantity() {
+    let cartQuantity = 0;
 
-    button.addEventListener('click', () => {
-      const {productId} = button.dataset;
-      
-      let matchingItem; 
-
-      cart.forEach((item) => {
-        if (productId === item.productId) {
-          matchingItem = item;
-        }
-      });
-
-      const quantitySelector = document.querySelector(
-        `.js-quantity-selector-${productId}`
-      );
-      const quantity = Number(quantitySelector.value);
-
-      if (matchingItem) {
-        matchingItem.quantity ++;
-      } else {
-        cart.push({
-          productId,
-          quantity: 1
-        });
-      }
-
-      let cartQuantity = 0;
-
-      cart.forEach((item) => {
-        cartQuantity += item.quantity;
-      });
-
-      document.querySelector('.js-cart-quantity').
-        innerHTML = cartQuantity;
-        
-      const addedMessage = document.querySelector(
-         `.js-added-to-cart-${productId}`
-      );  
-
-      addedMessage.classList.add('added-to-cart-visible');
-
-      // Check if a previous timeoutId exists. If it does,
-      // we will stop it.
-      if (addedMessageTimeoutId) {
-        clearTimeout(addedMessageTimeoutId);
-      }
-
-      const timeoutid = setTimeout(() => {
-        addedMessage.classList.remove('added-to-cart-visible');
-      }, 2000);
-
-      // Save the timeoutId so we can stop it later.
-      addedMessageTimeoutId = timeoutid;
-      
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
     });
-  });
 
+    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+  }
+
+  document.querySelectorAll('.js-add-to-cart')
+    .forEach((button) => {
+      //let addedMessageTimeoutId; // For using closure
+
+      button.addEventListener('click', () => {
+        const { productId } = button.dataset;
+
+        addToCart(productId);
+        updateCartQuantity();
+        showAddedMessage(productId);
+      });
+    });
+});
