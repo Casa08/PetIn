@@ -1,13 +1,14 @@
-import { cart, addToCart } from '../products/cart.js';
-import { products as catProducts } from './products/cat_product_index.js';
+
+import {cart, addToCart} from '../products/cart.js';
+import {products as catProducts} from './products/cat_product_index.js';
 import { centsToDollars } from '../utilities/money_handling.js';
 import { showAddedMessage } from '../utilities/show_added_message.js';
 
 let productsHTML = '';
 
 catProducts.forEach((product) => {
-  productsHTML += `
-   <div class="product-container">
+  productsHTML += 
+   `<div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
           src="${product.image}">
@@ -64,6 +65,7 @@ catProducts.forEach((product) => {
 document.querySelector('.js-cat-products-grid').
   innerHTML = productsHTML;
 
+
   function updateCartQuantity() {
     let cartQuantity = 0;
 
@@ -74,21 +76,19 @@ document.querySelector('.js-cat-products-grid').
     document.querySelector('.js-cart-quantity').
       innerHTML = cartQuantity;
   }
-
-  updateCartQuantity();
-
+  
+  
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     //let addedMessageTimeoutId; //For using closure
-
+    
     button.addEventListener('click', () => {
       const {productId} = button.dataset;
       
       console.log('Quantity selector value:', quantitySelector ? quantitySelector.value : 'not found'); // Debug log
-
       addToCart(productId);
       updateCartQuantity();
       showAddedMessage(productId);
-
+      
     });
   });
