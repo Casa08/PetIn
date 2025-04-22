@@ -1,4 +1,3 @@
-
 import {cart, addToCart} from '../products/cart.js';
 import {products as catProducts} from './products/cat_product_index.js';
 import { centsToDollars } from '../utilities/money_handling.js';
@@ -6,6 +5,7 @@ import { showAddedMessage } from '../utilities/show_added_message.js';
 
 let productsHTML = '';
 
+// 🧱 Dynamically render cat products
 catProducts.forEach((product) => {
   productsHTML += 
    `<div class="product-container">
@@ -53,42 +53,46 @@ catProducts.forEach((product) => {
       </div>
   
       <button class="add-to-cart-button button-primary js-add-to-cart"
-              data-product-id="${product.id}"
-      >
+              data-product-id="${product.id}">
         Add to Cart
       </button>
-    </div> 
-  `;
-
+    </div>`;
 });
 
+// 💡 Inject HTML into the grid
 document.querySelector('.js-cat-products-grid').
   innerHTML = productsHTML;
 
+// 🧮 Update the cart quantity displayed in the header
+function updateCartQuantity() {
+  let cartQuantity = 0;
 
-  function updateCartQuantity() {
-    let cartQuantity = 0;
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
 
-    cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-    });
+  document.querySelector('.js-cart-quantity').
+    innerHTML = cartQuantity;
+}
 
-    document.querySelector('.js-cart-quantity').
-      innerHTML = cartQuantity;
-  }
-  
-  
+// 🛒 Add to Cart button logic
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
-    //let addedMessageTimeoutId; //For using closure
-    
+    //let addedMessageTimeoutId; // Optional: for handling added message timers
+
     button.addEventListener('click', () => {
       const {productId} = button.dataset;
-      
-      console.log('Quantity selector value:', quantitySelector ? quantitySelector.value : 'not found'); // Debug log
-      addToCart(productId);
+
+      // ✅ Fix: Define quantitySelector in correct scope before calling addToCart
+      const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+      const quantity = Number(quantitySelector.value);
+
+      // ⚠️ Manually increment based on quantity selected
+      for (let i = 0; i < quantity; i++) {
+        addToCart(productId);
+      }
+
       updateCartQuantity();
       showAddedMessage(productId);
-      
     });
   });
