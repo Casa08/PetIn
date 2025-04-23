@@ -1,4 +1,4 @@
-import { centsToDollars } from '../utilities/money_handling.js';
+import { centsToDollars } from '../../scripts/utilities/money_handling';
 
 console.log('test suite: format currency');
 console.log('converts cents to dollars');
