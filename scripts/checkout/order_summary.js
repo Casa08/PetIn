@@ -8,7 +8,11 @@ import {deliveryOptions} from '../products/delivery_options.js';
 import { renderPaymentSummary } from './payment_summary.js';
 
 // 🧠 Function to render the order summary dynamically
-export function renderOrderSummary() {
+export function renderOrderSummary(container = document.querySelector('.js-order-summary')) {
+  if (!container) {
+    console.error('Order summary container not found');
+    return;
+  }
 
   const allProducts = [...dogProducts, ...catProducts, ...birdProducts];
   console.log(cart);
@@ -50,7 +54,8 @@ export function renderOrderSummary() {
     );
 
     cartSummaryHTML += ` 
-      <div class="cart-item-container 
+      <div class="cart-item-container
+      js-cart-item-container 
       js-cart-item-container-${matchingProduct.id}">
         <div class="delivery-date">
           Delivery date: ${dateDisplay}
@@ -67,7 +72,7 @@ export function renderOrderSummary() {
             <div class="product-price">
               $${centsToDollars(matchingProduct.priceCents)}
             </div>
-            <div class="product-quantity">
+            <div class="product-quantity js-product-quantity-${matchingProduct.id}">
               <span>
                 Quantity: <span class="quantity-label">${cartItem.quantity}</span>
               </span>
@@ -75,7 +80,9 @@ export function renderOrderSummary() {
                 Update
               </span>
               <span class="delete-quantity-link link-primary
-              js-delete-link" data-product-id="${matchingProduct.id}">
+              js-delete-link
+              js-delete-link-${matchingProduct.id}" 
+              data-product-id="${matchingProduct.id}">
                 Delete
               </span>
             </div>
@@ -135,8 +142,7 @@ export function renderOrderSummary() {
     return HTML;
   }
 
-  document.querySelector('.js-order-summary').
-    innerHTML = cartSummaryHTML;
+  container.innerHTML = cartSummaryHTML;
 
   // 🗑️ Handle delete item button
   document.querySelectorAll('.js-delete-link').
@@ -145,16 +151,17 @@ export function renderOrderSummary() {
         const { productId } = link.dataset;
         removeFromCart(productId);
 
-        const container = document.querySelector(
+        const itemContainer = container.querySelector(
           `.js-cart-item-container-${productId}`
         );
-
-        container.remove();
+        if (itemContainer) itemContainer.remove();
 
         updateCartQuantity();
-        renderPaymentSummary();
+        if (typeof renderPaymentSummary === 'function') {
+          renderPaymentSummary();
+        }
       });
-    });
+  });
 
   // 🧮 Update item count in header
   function updateCartQuantity() {
@@ -164,20 +171,23 @@ export function renderOrderSummary() {
       cartQuantity += cartItem.quantity;
     });
 
-    document.querySelector('.js-return-to-home-link').
-      innerHTML = `${cartQuantity} items`;
+    const homeLink = document.querySelector('.js-return-to-home-link');
+    if (homeLink) {
+      homeLink.innerHTML = `${cartQuantity} items`;
+    }
   }
 
   updateCartQuantity();
 
   // ✅ Register event listener for delivery option change
-  document.querySelectorAll('.js-delivery-option')
-    .forEach((element) => {
-      element.addEventListener('click', () => {
-        const {productId, deliveryOptionId} = element.dataset;
-        updateDeliveryOption(productId, deliveryOptionId);
-        renderOrderSummary(); // re-render summary
-        renderPaymentSummary(); // re-render payment summary
-      });
+  container.querySelectorAll('.js-delivery-option').forEach((element) => {
+    element.addEventListener('click', () => {
+      const {productId, deliveryOptionId} = element.dataset;
+      updateDeliveryOption(productId, deliveryOptionId);
+      renderOrderSummary(container);
+      if (typeof renderPaymentSummary === 'function') {
+        renderPaymentSummary();
+      }
     });
+  });
 };
