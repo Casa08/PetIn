@@ -70,7 +70,7 @@ export function renderOrderSummary(container = document.querySelector('.js-order
               ${matchingProduct.name}
             </div>
             <div class="product-price">
-              $${centsToDollars(matchingProduct.priceCents)}
+              $${matchingProduct.getPrice()}
             </div>
             <div class="product-quantity js-product-quantity-${matchingProduct.id}">
               <span>

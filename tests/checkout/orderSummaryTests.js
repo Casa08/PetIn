@@ -1,5 +1,6 @@
 import { renderOrderSummary } from '../../scripts/checkout/order_summary.js';
-import { loadFromStorage } from '../../scripts/products/cart.js';
+import { cart } from '../../scripts/products/cart.js';
+
 
 describe('test suite: render order summary', () => {
   const productId1 = 'df3638ce-6aa0-4b85-b27f-e1d07eb678c61';
@@ -8,28 +9,29 @@ describe('test suite: render order summary', () => {
   beforeEach(() => {
     // Clear test container to avoid leftover DOM affecting results
     document.querySelector('.js-test-container').innerHTML = `
-      <div class="js-order-summary"></div>
-      <div class="js-payment-summary"></div>
-    `;
+    <div class="js-order-summary"></div>
+    <div class="js-payment-summary"></div>
+  `;
 
-    spyOn(localStorage, 'getItem').and.callFake(() => {
-      return JSON.stringify([
-        {
-          productId: productId1,
-          quantity: 2,
-          deliveryOptionId: '1'
-        },
-        {
-          productId: productId2,
-          quantity: 1,
-          deliveryOptionId: '2'
-        }
-      ]);
-    });
-
-    loadFromStorage();
-    renderOrderSummary();
+  spyOn(localStorage, 'getItem').and.callFake(() => {
+    return JSON.stringify([
+      {
+        productId: productId1,
+        quantity: 2,
+        deliveryOptionId: '1'
+      },
+      {
+        productId: productId2,
+        quantity: 1,
+        deliveryOptionId: '2'
+      }
+    ]);
   });
+
+  cart.cartItems = JSON.parse(localStorage.getItem('cart'));
+
+  renderOrderSummary();
+});
 
   it('displays cart', () => {
     expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(2);

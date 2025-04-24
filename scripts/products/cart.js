@@ -1,6 +1,6 @@
 export class Cart {
-  cartItems = undefined;
-  #localStorageKey = undefined;
+  cartItems;
+  #localStorageKey;
 
   constructor(localStorageKey) {
     this.#localStorageKey = localStorageKey;
@@ -66,6 +66,6 @@ export class Cart {
   }
 }
 
-// Create and export a default cart instance
+// Create and export the cart instance
 const cart = new Cart('cart');
 export { cart };
