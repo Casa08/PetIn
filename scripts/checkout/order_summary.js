@@ -1,4 +1,4 @@
-import {cart, removeFromCart, updateDeliveryOption} from '../products/cart.js';
+import { cart } from '../products/cart.js';
 import { products as dogProducts } from '../products/dog_product.js';
 import { products as catProducts } from '../products/cat_product.js';
 import { products as birdProducts } from '../products/bird_product.js';
@@ -18,7 +18,7 @@ export function renderOrderSummary(container = document.querySelector('.js-order
   console.log(cart);
   let cartSummaryHTML = '';
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     const productId = cartItem.productId;
 
     let matchingProduct;
@@ -149,7 +149,7 @@ export function renderOrderSummary(container = document.querySelector('.js-order
     forEach((link) => {
       link.addEventListener('click', () => {
         const { productId } = link.dataset;
-        removeFromCart(productId);
+        cart.removeFromCart(productId);
 
         const itemContainer = container.querySelector(
           `.js-cart-item-container-${productId}`
@@ -167,7 +167,7 @@ export function renderOrderSummary(container = document.querySelector('.js-order
   function updateCartQuantity() {
     let cartQuantity = 0;
 
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
       cartQuantity += cartItem.quantity;
     });
 
@@ -183,7 +183,7 @@ export function renderOrderSummary(container = document.querySelector('.js-order
   container.querySelectorAll('.js-delivery-option').forEach((element) => {
     element.addEventListener('click', () => {
       const {productId, deliveryOptionId} = element.dataset;
-      updateDeliveryOption(productId, deliveryOptionId);
+      cart.updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary(container);
       if (typeof renderPaymentSummary === 'function') {
         renderPaymentSummary();

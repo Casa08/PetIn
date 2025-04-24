@@ -3,3 +3,4 @@ import { renderPaymentSummary } from './checkout/payment_summary.js';
 
 renderOrderSummary();
 renderPaymentSummary();
+

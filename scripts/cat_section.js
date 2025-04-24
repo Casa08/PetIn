@@ -1,4 +1,4 @@
-import {cart, addToCart} from './products/cart.js';
+import { cart } from './products/cart.js';
 import {products} from './products/cat_product.js';
 import { centsToDollars } from './utilities/money_handling.js';
 import { showAddedMessage } from './utilities/show_added_message.js';
@@ -67,7 +67,7 @@ document.querySelector('.js-products-grid').
   function updateCartQuantity() {
     let cartQuantity = 0;
 
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
       cartQuantity += cartItem.quantity;
     });
 
@@ -83,7 +83,7 @@ document.querySelectorAll('.js-add-to-cart')
     button.addEventListener('click', () => {
       const {productId} = button.dataset;
       
-      addToCart(productId);
+      cart.addToCart(productId);
       updateCartQuantity();
       showAddedMessage(productId);
 
