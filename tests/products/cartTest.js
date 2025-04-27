@@ -13,7 +13,7 @@ describe('test suite: addToCart', () => {
       ]);
     });
 
-    // Reload cart data from storage manually
+    // Reload cart data from storage
     cart.cartItems = JSON.parse(localStorage.getItem('cart'));
   });
 

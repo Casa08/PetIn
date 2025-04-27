@@ -65,7 +65,7 @@ export function renderPaymentSummary() {
         <div class="payment-summary-money">$${centsToDollars(totalCents)}</div>
       </div>
 
-      <button class="place-order-button button-primary">
+      <button class="place-order-button button-primary js-place-order">
         Place your order
       </button>
     
