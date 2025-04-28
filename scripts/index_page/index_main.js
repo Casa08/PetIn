@@ -1,5 +1,5 @@
 import { cart } from '../products/cart.js';
-import { products as dogProducts } from './products/dog_product_index.js';
+import { products as dogProducts } from 'products/dog_product_index.js';
 import { products as catProducts } from './products/cat_product_index.js';
 import { products as birdProducts } from './products/bird_product_index.js';
 import { centsToDollars } from '../utilities/money_handling.js';
