@@ -16,7 +16,7 @@ class Product {
   }
 
   getStarsUrl() {
-    return `../images/ratings/rating-${this.rating.stars * 10}.png`;
+    return `../../images/ratings/rating-${this.rating.stars * 10}.png`;
   }
 
   getPrice() {
@@ -29,7 +29,7 @@ class Product {
 export const products = [
   {
     id: "cf3638ce-6aa0-4b85-b27f-e1d07eb678c61",
-    image: "../images/products/cf_1.webp",
+    image: "images/products/cf_1.webp",
     name: "Blue Buffalo True Solutions Digestive Care Natural Dry Cat Food for Adult Cats, Chicken, 11-lb. Bag",
     rating: {
       stars: 4.5,
@@ -44,7 +44,7 @@ export const products = [
   },
   {
     id: "cf3638ce-6aa0-4b85-b27f-e1d07eb6782",
-    image: "../images/products/cf_2.webp",
+    image: "images/products/cf_2.webp",
     name: "Hill's Science Diet Adult 11+, Senior Adult 11+ Premium Nutrition, Dry Cat Food, Chicken Recipe, 3.5 lb Bag",
     rating: {
       stars: 4.0,
@@ -59,7 +59,7 @@ export const products = [
   },
   {
     id: "cf3638ce-6aa0-4b85-b27f-e1d07eb678c3",
-    image: "../images/products/cf_3.webp",
+    image: "images/products/cf_3.webp",
     name: "Purina Fancy Feast Gourmet Gravy Wet Cat Food, Petites Tender Beef With Carrots Entree - 2.8 Ounce (Pack of 12)",
     rating: {
       stars: 4.5,
@@ -74,7 +74,7 @@ export const products = [
   },
   {
     id: "ct43638ce-6aa0-4b85-b27f-e1d07eb678c1",
-    image: "../images/products/ct_1.webp",
+    image: "images/products/ct_1.webp",
     name: "2025 New Generation Interactive Cat Ball Toy with Elastic Mesh Tail - Automatic Motion-Activated Chirping Kitten Toy for Indoor Cats, Relieves Boredom & Encourages Play",
     rating: {
       stars: 3.5,
