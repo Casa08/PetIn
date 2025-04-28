@@ -16,7 +16,7 @@ class Product {
   }
 
   getStarsUrl() {
-    return "images/ratings/rating-" + (this.rating.stars * 10) + ".png";
+    return "../../images/ratings/rating-" + (this.rating.stars * 10) + ".png";
   }
 
   getPrice() {
@@ -27,7 +27,7 @@ class Product {
 export const products = [
   {
     id: "df3638ce-6aa0-4b85-b27f-e1d07eb678c61",
-    image: "images/products/df_1.webp",
+    image: "../../images/products/df_1.webp",
     name: "Amazon Brand - Wag Dry Dog Food Salmon & Sweet Potato, Grain Free 24 lb Bag",
     rating: { stars: 4.5, count: 6878 },
     priceCents: 5133,
